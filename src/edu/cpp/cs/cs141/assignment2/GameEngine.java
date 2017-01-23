@@ -9,10 +9,9 @@ package edu.cpp.cs.cs141.assignment2;
  *
  * @author jmb
  */
-public class Main {
-    public static void main(String[] args)
+public class GameEngine {
+    public void run()
     {
-        GameEngine game = new GameEngine();
-        game.run();
+        // game loop
     }
 }
