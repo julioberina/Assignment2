@@ -101,4 +101,15 @@ public class Gun {
     {
         return (ammo == 0);
     }
+    
+    public String getWeaponType()
+    {
+        return weaponType;
+    }
+    
+    public String getAmmo()
+    {
+        String weaponAmmo = ammo + " / " + maxAmmo.value();
+        return weaponAmmo;
+    }
 }

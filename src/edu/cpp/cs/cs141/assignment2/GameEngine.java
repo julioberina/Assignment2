@@ -63,4 +63,19 @@ public class GameEngine {
     {
         return dungeon;
     }
+    
+    public int getPlayerHP()
+    {
+        return player.getHP();
+    }
+    
+    public String getPlayerWeapon()
+    {
+        return player.getGun().getWeaponType();
+    }
+    
+    public String getPlayerAmmo()
+    {
+        return player.getGun().getAmmo();
+    }
 }

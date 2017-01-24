@@ -28,4 +28,14 @@ public abstract class ActiveAgent {
     {
         this.gun = gun;
     }
+    
+    public Gun getGun()
+    {
+        return gun;
+    }
+    
+    public int getHP()
+    {
+        return hitPoints;
+    }
 }
