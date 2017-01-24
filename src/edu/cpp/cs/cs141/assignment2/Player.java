@@ -10,6 +10,7 @@ package edu.cpp.cs.cs141.assignment2;
  * @author jmb
  */
 public class Player extends ActiveAgent {
+    
     public Player()
     {
         super(20);

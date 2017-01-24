@@ -12,6 +12,7 @@ import java.util.Scanner;
  * @author jmb
  */
 public class UserInterface {
+    
     private GameEngine engine;
     private Scanner scan;
     
@@ -22,8 +23,9 @@ public class UserInterface {
         scan = new Scanner(System.in);
         engine = new GameEngine();
         System.out.println("Welcome to Escape the Dungeon!\n");
-        int choice = getWeaponChoice();
-        engine.assignPlayerWeapon(choice);
+
+        engine.assignPlayerWeapon(getWeaponChoice());
+        startGame();
     }
     
     public int getWeaponChoice()
@@ -43,5 +45,10 @@ public class UserInterface {
         }
         
         return choice;
+    }
+    
+    public void startGame()
+    {
+        
     }
 }
