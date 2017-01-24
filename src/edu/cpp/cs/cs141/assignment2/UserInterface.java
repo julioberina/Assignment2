@@ -21,9 +21,14 @@ public class UserInterface {
     {
         scan = new Scanner(System.in);
         engine = new GameEngine();
-        int choice = 0;
-        
         System.out.println("Welcome to Escape the Dungeon!\n");
+        int choice = getWeaponChoice();
+        engine.assignPlayerWeapon(choice);
+    }
+    
+    public int getWeaponChoice()
+    {
+        int choice = 0;
         System.out.println("Please choose a weapon for the game: ");
         System.out.println("1. Pistol (75% accuracy, 1 hp damage)");
         System.out.println("2. Rifle (65% accuracy, 2 hp damage)");
@@ -37,6 +42,6 @@ public class UserInterface {
                 System.out.println("Invalid input!  Must be 1, 2, or 3!\n");
         }
         
-        engine.assignPlayerWeapon(choice);
+        return choice;
     }
 }
