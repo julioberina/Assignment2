@@ -49,8 +49,22 @@ public class UserInterface {
     
     public void startGame()
     {
-        while (engine.playerAlive() && engine.stillInDungeon())
+        while (engine.playerAlive() && engine.stillInDungeon()) {
             displayTurn();
+            
+            
+        }
+    }
+    
+    public void displayStats()
+    {
+        System.out.println("Player HP: " + engine.getPlayerHP());
+        System.out.println("Player Weapon: " + engine.getPlayerWeapon());
+        System.out.println("Player Ammo: " + engine.getPlayerAmmo());
+        System.out.print("\n");
+        
+        for (String component: engine.getDungeon())
+            System.out.print(component);
     }
     
     public void displayTurn()
@@ -70,5 +84,7 @@ public class UserInterface {
             else
                 System.out.print("-");
         }
+        
+        System.out.print("\n");
     }
 }

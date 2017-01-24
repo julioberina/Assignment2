@@ -22,12 +22,12 @@ public class GameEngine {
         enemy = new Enemy();
         
         dungeon = new String[11];
-        dungeon[0] = "#";
+        dungeon[0] = "#   ";
         for (int i = 1; i < 11; i++) {
             if (i == 10)
                 dungeon[i] = "|";
             else
-                dungeon[i] = "_";
+                dungeon[i] = "_   ";
         }
         
         position = 0;
@@ -57,5 +57,10 @@ public class GameEngine {
     public boolean stillInDungeon()
     {
         return (!dungeon[10].equals("@"));
+    }
+    
+    public String[] getDungeon()
+    {
+        return dungeon;
     }
 }
