@@ -13,6 +13,25 @@ public class GameEngine {
     
     private Player player;
     private Enemy enemy;
+    private String[] dungeon;
+    private int position;
+    
+    public GameEngine()
+    {
+        player = new Player();
+        enemy = new Enemy();
+        
+        dungeon = new String[11];
+        dungeon[0] = "#";
+        for (int i = 1; i < 11; i++) {
+            if (i == 10)
+                dungeon[i] = "|";
+            else
+                dungeon[i] = "_";
+        }
+        
+        position = 0;
+    }
     
     public void assignPlayerWeapon(int choice)
     {
@@ -30,5 +49,13 @@ public class GameEngine {
         }
     }
     
+    public boolean playerAlive()
+    {
+        return player.isAlive();
+    }
     
+    public boolean stillInDungeon()
+    {
+        return (!dungeon[10].equals("@"));
+    }
 }

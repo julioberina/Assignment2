@@ -49,6 +49,26 @@ public class UserInterface {
     
     public void startGame()
     {
+        while (engine.playerAlive() && engine.stillInDungeon())
+            displayTurn();
+    }
+    
+    public void displayTurn()
+    {
+        for (int i = 0; i < 70; i++) {
+            if (i == 69)
+                System.out.println("-");
+            else
+                System.out.print("-");
+        }
         
+        System.out.print("\n");
+        
+        for (int i = 0; i < 70; i++) {
+            if (i == 69)
+                System.out.println("-");
+            else
+                System.out.print("-");
+        }
     }
 }
