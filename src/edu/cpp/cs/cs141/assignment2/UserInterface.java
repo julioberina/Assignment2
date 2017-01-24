@@ -5,13 +5,21 @@
  */
 package edu.cpp.cs.cs141.assignment2;
 
+import java.util.Scanner;
+
 /**
  *
  * @author jmb
  */
 public class UserInterface {
+    private GameEngine engine;
+    private Scanner scan;
+    
+    // game loop, instantiate engine and run other methods
+    // corresponding to the desired outcome
     public void run()
     {
-        // game loop
+        scan = new Scanner(System.in);
+        engine = new GameEngine();
     }
 }
