@@ -10,6 +10,8 @@ package edu.cpp.cs.cs141.assignment2;
  * @author jmb
  */
 public class Enemy extends ActiveAgent {
+    private Item item;
+    
     public Enemy()
     {
         super(5);
