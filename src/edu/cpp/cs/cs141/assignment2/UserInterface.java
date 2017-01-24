@@ -51,8 +51,7 @@ public class UserInterface {
     {
         while (engine.playerAlive() && engine.stillInDungeon()) {
             displayTurn();
-            
-            
+            playTurn();
         }
     }
     
@@ -76,7 +75,7 @@ public class UserInterface {
                 System.out.print("-");
         }
         
-        System.out.print("\n");
+        displayStats();
         
         for (int i = 0; i < 70; i++) {
             if (i == 69)
@@ -86,5 +85,49 @@ public class UserInterface {
         }
         
         System.out.print("\n");
+    }
+    
+    public void playTurn()
+    {
+        if (engine.battleMode())
+        {
+            engine.spawnEnemy();
+            int action = getBattleAction();
+            switch (action)
+            {
+                case 1:
+                    engine.getPlayer().shoot(engine.getEnemy());
+                    break;
+                case 2:
+                    engine.getPlayer().escapeFrom(engine.getEnemy());
+                    break;
+            }
+        }
+        
+        System.out.print("Press Enter to take one step: ");
+        scan.nextLine();
+        engine.movePlayer();
+        System.out.print("\n\n\n");
+    }
+    
+    public int getBattleAction()
+    {
+        int choice = 0;
+        System.out.println("You have encountered an enemy!");
+        System.out.println("What would you like to do?");
+        System.out.println("1. Shoot");
+        System.out.println("2. Escape\n");
+        
+        while (choice < 1 || choice > 2)
+        {
+            System.out.print("Enter input:  ");
+            choice = scan.nextInt();
+            
+            if (choice < 1 || choice > 2)
+                System.out.println("Invalid input! Must be 1 or 2!\n");
+        }
+        
+        System.out.print("\n");
+        return choice;
     }
 }

@@ -15,11 +15,13 @@ public class GameEngine {
     private Enemy enemy;
     private String[] dungeon;
     private int position;
+    private boolean battle;
     
     public GameEngine()
     {
         player = new Player();
-        enemy = new Enemy();
+        enemy = null;
+        battle = false;
         
         dungeon = new String[11];
         dungeon[0] = "#   ";
@@ -64,6 +66,11 @@ public class GameEngine {
         return dungeon;
     }
     
+    public Player getPlayer()
+    {
+        return player;
+    }
+    
     public int getPlayerHP()
     {
         return player.getHP();
@@ -77,5 +84,39 @@ public class GameEngine {
     public String getPlayerAmmo()
     {
         return player.getGun().getAmmo();
+    }
+    
+    public Enemy getEnemy()
+    {
+        return enemy;
+    }
+    
+    public void movePlayer()
+    {
+        ++position;
+        dungeon[position-1] = "_   ";
+        
+        if (position == 10)
+            dungeon[position] = "@";
+        else
+            dungeon[position] = "#   ";
+    }
+    
+    public void initiateBattle()
+    {
+        battle = true;
+    }
+    
+    public boolean battleMode()
+    {
+        return battle;
+    }
+    
+    public void spawnEnemy()
+    {
+        if (enemy == null)
+            enemy = new Enemy();
+        else
+            enemy.respawn();
     }
 }
