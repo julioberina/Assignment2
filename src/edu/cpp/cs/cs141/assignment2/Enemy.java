@@ -9,9 +9,9 @@ package edu.cpp.cs.cs141.assignment2;
  *
  * @author jmb
  */
-public class GameEngine {
-    private Player player;
-    private Enemy enemy;
-    
-    
+public class Enemy extends ActiveAgent {
+    public Enemy()
+    {
+        super(5);
+    }
 }

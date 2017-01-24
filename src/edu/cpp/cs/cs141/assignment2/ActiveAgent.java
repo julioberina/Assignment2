@@ -9,6 +9,12 @@ package edu.cpp.cs.cs141.assignment2;
  *
  * @author jmb
  */
-public class ActiveAgent {
+public abstract class ActiveAgent {
+    private int hitPoints;
+    private Gun gun;
     
+    public ActiveAgent(int hp)
+    {
+        hitPoints = hp;
+    }
 }
