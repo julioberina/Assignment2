@@ -9,6 +9,9 @@ package edu.cpp.cs.cs141.assignment2;
  *
  * @author jmb
  */
-public class GameEngine {
-    
+public class UserInterface {
+    public void run()
+    {
+        // game loop
+    }
 }
