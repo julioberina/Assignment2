@@ -51,6 +51,10 @@ public class UserInterface {
     {
         while (engine.playerAlive() && engine.stillInDungeon()) {
             displayTurn();
+            
+            if (engine.encounterOccurred())
+                engine.initiateBattle();
+            
             playTurn();
         }
     }
@@ -89,18 +93,23 @@ public class UserInterface {
     
     public void playTurn()
     {
+        
         if (engine.battleMode())
         {
             engine.spawnEnemy();
-            int action = getBattleAction();
-            switch (action)
+            
+            while (engine.battleMode())
             {
-                case 1:
-                    engine.getPlayer().shoot(engine.getEnemy());
-                    break;
-                case 2:
-                    engine.getPlayer().escapeFrom(engine.getEnemy());
-                    break;
+                int action = getBattleAction();
+                switch (action)
+                {
+                    case 1:
+                        engine.getPlayer().shoot(engine.getEnemy());
+                        break;
+                    case 2:
+                        engine.escapeEnemy();
+                        break;
+                }
             }
         }
         

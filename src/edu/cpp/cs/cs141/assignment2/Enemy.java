@@ -5,8 +5,6 @@
  */
 package edu.cpp.cs.cs141.assignment2;
 
-import java.util.Random;
-
 /**
  *
  * @author jmb
@@ -14,11 +12,10 @@ import java.util.Random;
 public class Enemy extends ActiveAgent {
     
     private Item item;
-    private Random rand;
     
-    public Enemy()
+    public Enemy(int itemType)
     {
         super(5);
-        rand = new Random();
+        item = new Item(itemType);
     }
 }

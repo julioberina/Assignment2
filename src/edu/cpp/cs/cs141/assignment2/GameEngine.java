@@ -5,6 +5,11 @@
  */
 package edu.cpp.cs.cs141.assignment2;
 
+import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author jmb
@@ -14,6 +19,8 @@ public class GameEngine {
     private Player player;
     private Enemy enemy;
     private String[] dungeon;
+    private Random rand;
+    private List<Boolean> encounterChances;
     private int position;
     private boolean battle;
     
@@ -33,6 +40,19 @@ public class GameEngine {
         }
         
         position = 0;
+        setEncounterChances();
+    }
+    
+    public void setEncounterChances()
+    {
+        encounterChances = new ArrayList<Boolean>();
+        
+        for (int i = 0; i < 15; i++)
+            encounterChances.add(true);
+        for (int i = 15; i < 100; i++)
+            encounterChances.add(false);
+        for (int i = 0; i < 3; i++)
+            Collections.shuffle(encounterChances);
     }
     
     public void assignPlayerWeapon(int choice)
@@ -91,6 +111,11 @@ public class GameEngine {
         return enemy;
     }
     
+    public void escapeEnemy()
+    {
+        enemy = null;
+    }
+    
     public void movePlayer()
     {
         ++position;
@@ -102,6 +127,11 @@ public class GameEngine {
             dungeon[position] = "#   ";
     }
     
+    public boolean encounterOccurred()
+    {
+        return encounterChances.get(position);
+    }
+    
     public void initiateBattle()
     {
         battle = true;
@@ -109,14 +139,20 @@ public class GameEngine {
     
     public boolean battleMode()
     {
+        if (enemy == null)
+            battle = false;
+        else
+        {
+            if (player.isDead() || enemy.isDead())
+                battle = false;
+        }
+        
         return battle;
     }
     
     public void spawnEnemy()
     {
         if (enemy == null)
-            enemy = new Enemy();
-        else
-            enemy.respawn();
+            enemy = new Enemy(rand.nextInt(2));
     }
 }

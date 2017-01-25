@@ -5,17 +5,12 @@
  */
 package edu.cpp.cs.cs141.assignment2;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  *
  * @author jmb
  */
 public abstract class ActiveAgent {
     
-    private List<Boolean> shotLanded;
     private int hitPoints;
     private Gun gun;
     
@@ -29,14 +24,24 @@ public abstract class ActiveAgent {
         return (hitPoints > 0);
     }
     
+    public boolean isDead()
+    {
+        return (hitPoints <= 0);
+    }
+    
     public void assignWeapon(Gun gun)
     {
         this.gun = gun;
     }
     
-    public void attack(ActiveAgent agent)
+    public void takeDamage(int damage)
     {
-        
+        hitPoints -= damage;
+    }
+    
+    public void shoot(ActiveAgent agent)
+    {
+        gun.shoot(agent);
     }
     
     public Gun getGun()
