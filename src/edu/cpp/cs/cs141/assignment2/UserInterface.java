@@ -49,21 +49,29 @@ public class UserInterface {
     
     public void startGame()
     {
-        while (engine.playerAlive() && engine.stillInDungeon()) {
-            displayTurn();
-            
+        while (engine.getPlayer().isAlive() && engine.stillInDungeon()) {
             if (engine.encounterOccurred())
                 engine.initiateBattle();
             
+            displayTurn();
             playTurn();
         }
     }
     
     public void displayStats()
     {
-        System.out.println("Player HP: " + engine.getPlayerHP());
-        System.out.println("Player Weapon: " + engine.getPlayerWeapon());
-        System.out.println("Player Ammo: " + engine.getPlayerAmmo());
+        System.out.print("Player HP: " + engine.getPlayerHP() + "\t\t\t");
+        if (engine.getEnemy() != null)
+            System.out.println("Enemy HP: " + engine.getEnemyHP());
+        
+        System.out.print("Player Weapon: " + engine.getPlayerWeapon() + "\t\t\t");
+        if (engine.getEnemy() != null)
+            System.out.println("Enemy Weapon: " + engine.getEnemyWeapon());
+        
+        System.out.print("Player Ammo: " + engine.getPlayerAmmo() + "\t\t\t");
+        if (engine.getEnemy() != null)
+            System.out.println("Enemy Ammo: " + engine.getEnemyAmmo());
+        
         System.out.print("\n");
         
         for (String component: engine.getDungeon())
@@ -93,25 +101,8 @@ public class UserInterface {
     
     public void playTurn()
     {
-        
         if (engine.battleMode())
-        {
-            engine.spawnEnemy();
-            
-            while (engine.battleMode())
-            {
-                int action = getBattleAction();
-                switch (action)
-                {
-                    case 1:
-                        engine.getPlayer().shoot(engine.getEnemy());
-                        break;
-                    case 2:
-                        engine.escapeEnemy();
-                        break;
-                }
-            }
-        }
+            manageBattle();
         
         System.out.print("Press Enter to take one step: ");
         scan.nextLine();
@@ -119,10 +110,37 @@ public class UserInterface {
         System.out.print("\n\n\n");
     }
     
+    public void manageBattle()
+    {
+        engine.spawnEnemy();
+        System.out.println("You have encountered an enemy!");
+
+        while (engine.battleMode())
+        {
+            int action = getBattleAction();
+            switch (action)
+            {
+                case 1:
+                    if (engine.getPlayer().shoot(engine.getEnemy()))
+                        System.out.println("Hit!");
+                    else
+                        System.out.println("Missed!");
+                    break;
+                case 2:
+                    if (engine.escapeEnemy())
+                        System.out.println("Escape succeeded!");
+                    else
+                        System.out.println("Escape failed!");
+                    break;
+            }
+            
+            engine.simulateEnemyAttack();
+        }
+    }
+    
     public int getBattleAction()
     {
         int choice = 0;
-        System.out.println("You have encountered an enemy!");
         System.out.println("What would you like to do?");
         System.out.println("1. Shoot");
         System.out.println("2. Escape\n");

@@ -92,10 +92,10 @@ public class Gun {
         ammo = maxAmmo.value();
     }
     
-    public void shoot(ActiveAgent agent)
+    public boolean shoot(ActiveAgent agent)
     {
         ammo -= 1;
-        if (weaponAccuracy.get((shotCounter++ % 100)))
+        if (ammo > 0 && weaponAccuracy.get((shotCounter++ % 100)))
         {
             if (weaponType.equals("Pistol"))
                 agent.takeDamage(1);
@@ -103,7 +103,11 @@ public class Gun {
                 agent.takeDamage(2);
             else if (weaponType.equals("Shotgun"))
                 agent.takeDamage(5);
+            
+            return true;
         }
+        else
+            return false;
     }
     
     public boolean isEmpty()

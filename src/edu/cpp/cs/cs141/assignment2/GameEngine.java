@@ -71,11 +71,6 @@ public class GameEngine {
         }
     }
     
-    public boolean playerAlive()
-    {
-        return player.isAlive();
-    }
-    
     public boolean stillInDungeon()
     {
         return (!dungeon[10].equals("@"));
@@ -111,9 +106,30 @@ public class GameEngine {
         return enemy;
     }
     
-    public void escapeEnemy()
+    public int getEnemyHP()
     {
-        enemy = null;
+        return enemy.getHP();
+    }
+    
+    public String getEnemyWeapon()
+    {
+        return enemy.getGun().getWeaponType();
+    }
+    
+    public String getEnemyAmmo()
+    {
+        return enemy.getGun().getAmmo();
+    }
+    
+    public boolean escapeEnemy()
+    {
+        if (rand.nextInt(10) == 0)
+        {
+            enemy = null;
+            return true;
+        }
+        else
+            return false;
     }
     
     public void movePlayer()
@@ -135,6 +151,11 @@ public class GameEngine {
     public void initiateBattle()
     {
         battle = true;
+    }
+    
+    public void simulateEnemyAttack()
+    {
+        enemy.shoot(player);
     }
     
     public boolean battleMode()

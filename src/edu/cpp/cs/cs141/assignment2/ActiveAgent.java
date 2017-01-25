@@ -39,9 +39,9 @@ public abstract class ActiveAgent {
         hitPoints -= damage;
     }
     
-    public void shoot(ActiveAgent agent)
+    public boolean shoot(ActiveAgent agent)
     {
-        gun.shoot(agent);
+        return gun.shoot(agent);
     }
     
     public Gun getGun()
