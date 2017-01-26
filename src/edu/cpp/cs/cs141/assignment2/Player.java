@@ -15,4 +15,9 @@ public class Player extends ActiveAgent {
     {
         super(20);
     }
+    
+    public void restoreHealth()
+    {
+        restoreHP(20);
+    }
 }

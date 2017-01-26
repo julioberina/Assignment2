@@ -53,4 +53,9 @@ public abstract class ActiveAgent {
     {
         return hitPoints;
     }
+    
+    public void restoreHP(int hp)
+    {
+        hitPoints = hp;
+    }
 }

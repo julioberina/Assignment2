@@ -63,4 +63,14 @@ public class Enemy extends ActiveAgent {
         item.reassignTo(itemType);
         giveWeapon();
     }
+    
+    public String getItem()
+    {
+        return item.getType();
+    }
+    
+    public void dropItem()
+    {
+        item.reassignTo((-1));
+    }
 }

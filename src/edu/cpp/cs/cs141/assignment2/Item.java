@@ -29,6 +29,8 @@ public class Item {
     {
         if (item >= 0 && item <= 2)
             type = "health";
+        else if (item == -1)
+            type = "none";
         else
             type = "maxammo";
     }

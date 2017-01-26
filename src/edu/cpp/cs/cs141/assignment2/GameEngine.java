@@ -165,7 +165,13 @@ public class GameEngine {
         else
         {
             if (player.isDead() || enemy.isDead())
+            {
                 battle = false;
+                if (enemy.isDead() && enemy.getItem().equals("health"))
+                    player.restoreHealth();
+                else if (enemy.isDead() && enemy.getItem().equals("maxammo"))
+                    player.getGun().reload();
+            }
         }
         
         return battle;

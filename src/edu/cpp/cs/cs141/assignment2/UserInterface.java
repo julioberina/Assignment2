@@ -39,7 +39,7 @@ public class UserInterface {
         while (choice < 1 || choice > 3)
         {
             System.out.print("Enter 1, 2, or 3:  ");
-            choice = scan.nextInt();
+            choice = Integer.parseInt(scan.nextLine());
             if (choice < 1 || choice > 3)
                 System.out.println("Invalid input!  Must be 1, 2, or 3!\n");
         }
@@ -56,26 +56,36 @@ public class UserInterface {
             displayTurn();
             playTurn();
         }
+        
+        if (engine.getPlayer().isAlive())
+        {
+            displayTurn();
+            System.out.println("You win!\n");
+        }
+        else if (engine.getPlayer().isDead())
+            System.out.println("You lose!\n");
     }
     
     public void displayStats()
     {
-        System.out.print("Player HP: " + engine.getPlayerHP() + "\t\t\t");
+        System.out.println("Player HP: " + engine.getPlayerHP());
         if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("Enemy HP: " + engine.getEnemyHP());
+            System.out.println("\t\t\tEnemy HP: " + engine.getEnemyHP());
         
-        System.out.print("Player Weapon: " + engine.getPlayerWeapon() + "\t\t\t");
+        System.out.println("Player Weapon: " + engine.getPlayerWeapon());
         if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("Enemy Weapon: " + engine.getEnemyWeapon());
+            System.out.println("\t\t\tEnemy Weapon: " + engine.getEnemyWeapon());
         
-        System.out.print("Player Ammo: " + engine.getPlayerAmmo() + "\t\t\t");
+        System.out.println("Player Ammo: " + engine.getPlayerAmmo());
         if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("Enemy Ammo: " + engine.getEnemyAmmo());
+            System.out.println("\t\t\tEnemy Ammo: " + engine.getEnemyAmmo());
         
-        System.out.print("\n");
+        System.out.print("\n\n\n");
         
         for (String component: engine.getDungeon())
             System.out.print(component);
+        
+        System.out.print("\n");
     }
     
     public void displayTurn()
@@ -102,7 +112,18 @@ public class UserInterface {
     public void playTurn()
     {
         if (engine.battleMode())
+        {
             manageBattle();
+            if (engine.getEnemy().isDead())
+            {
+                System.out.println("Enemy defeated!");
+                if (engine.getEnemy().getItem().equals("health"))
+                    System.out.println("Picked up health. Restored HP.\n");
+                else if (engine.getEnemy().getItem().equals("maxammo"))
+                    System.out.println("Picked up ammo. Restored ammo.\n");
+                engine.getEnemy().dropItem();
+            }
+        }
         
         System.out.print("Press Enter to take one step: ");
         scan.nextLine();
@@ -124,7 +145,7 @@ public class UserInterface {
                     if (engine.getPlayer().shoot(engine.getEnemy()))
                         System.out.println("Hit!");
                     else
-                        System.out.println("Missed!");
+                        System.out.println((engine.getPlayer().getGun().isEmpty() ? "No ammo!" : "Missed!"));
                     break;
                 case 2:
                     if (engine.escapeEnemy())
@@ -140,13 +161,16 @@ public class UserInterface {
     
     public void simulateEnemyAttack()
     {
-        System.out.print("\n");
-        System.out.print("Enemy turn result:  ");
+        if (engine.getEnemy().isAlive())
+        {
+            System.out.print("\n");
+            System.out.print("Enemy turn result:  ");
         
-        if (engine.getEnemy().shoot(engine.getPlayer()))
-            System.out.println("Enemy shot you!\n");
-        else
-            System.out.println("Enemy missed!\n");
+            if (engine.getEnemy().shoot(engine.getPlayer()))
+                System.out.println("Enemy shot you!\n");
+            else
+                System.out.println("Enemy missed!\n");
+        }
     }
     
     public int getBattleAction()
@@ -159,7 +183,7 @@ public class UserInterface {
         while (choice < 1 || choice > 2)
         {
             System.out.print("Enter input:  ");
-            choice = scan.nextInt();
+            choice = Integer.parseInt(scan.nextLine());
             
             if (choice < 1 || choice > 2)
                 System.out.println("Invalid input! Must be 1 or 2!\n");
