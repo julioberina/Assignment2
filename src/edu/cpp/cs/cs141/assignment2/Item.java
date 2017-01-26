@@ -10,5 +10,26 @@ package edu.cpp.cs.cs141.assignment2;
  * @author jmb
  */
 public class Item {
+    private String type;
     
+    public Item(int item)
+    {
+        if (item >= 0 && item <= 2)
+           type = "health";
+        else
+           type = "maxammo";
+    }
+    
+    public String getType()
+    {
+        return type;
+    }
+    
+    public void reassignTo(int item)
+    {
+        if (item >= 0 && item <= 2)
+            type = "health";
+        else
+            type = "maxammo";
+    }
 }

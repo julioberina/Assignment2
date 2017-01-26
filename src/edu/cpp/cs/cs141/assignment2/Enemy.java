@@ -61,6 +61,6 @@ public class Enemy extends ActiveAgent {
     public void respawn(int itemType)
     {
         item.reassignTo(itemType);
-        
+        giveWeapon();
     }
 }

@@ -174,8 +174,8 @@ public class GameEngine {
     public void spawnEnemy()
     {
         if (enemy == null)
-            enemy = new Enemy(rand.nextInt(2));
+            enemy = new Enemy(rand.nextInt(10));
         else
-            enemy.respawn(rand.nextInt(2));
+            enemy.respawn(rand.nextInt(10));
     }
 }
