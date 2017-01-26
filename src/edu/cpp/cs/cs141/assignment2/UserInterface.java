@@ -61,15 +61,15 @@ public class UserInterface {
     public void displayStats()
     {
         System.out.print("Player HP: " + engine.getPlayerHP() + "\t\t\t");
-        if (engine.getEnemy() != null)
+        if (engine.getEnemy() != null && engine.getEnemy().isAlive())
             System.out.println("Enemy HP: " + engine.getEnemyHP());
         
         System.out.print("Player Weapon: " + engine.getPlayerWeapon() + "\t\t\t");
-        if (engine.getEnemy() != null)
+        if (engine.getEnemy() != null && engine.getEnemy().isAlive())
             System.out.println("Enemy Weapon: " + engine.getEnemyWeapon());
         
         System.out.print("Player Ammo: " + engine.getPlayerAmmo() + "\t\t\t");
-        if (engine.getEnemy() != null)
+        if (engine.getEnemy() != null && engine.getEnemy().isAlive())
             System.out.println("Enemy Ammo: " + engine.getEnemyAmmo());
         
         System.out.print("\n");
@@ -134,8 +134,19 @@ public class UserInterface {
                     break;
             }
             
-            engine.simulateEnemyAttack();
+            simulateEnemyAttack();
         }
+    }
+    
+    public void simulateEnemyAttack()
+    {
+        System.out.print("\n");
+        System.out.print("Enemy turn result:  ");
+        
+        if (engine.getEnemy().shoot(engine.getPlayer()))
+            System.out.println("Enemy shot you!\n");
+        else
+            System.out.println("Enemy missed!\n");
     }
     
     public int getBattleAction()
