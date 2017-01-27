@@ -68,17 +68,21 @@ public class UserInterface {
     
     public void displayStats()
     {
-        System.out.println("Player HP: " + engine.getPlayerHP());
+        System.out.print("Player HP: " + engine.getPlayerHP());
         if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("\t\t\tEnemy HP: " + engine.getEnemyHP());
+            System.out.print("\t\t\t\tEnemy HP: " + engine.getEnemyHP());
         
-        System.out.println("Player Weapon: " + engine.getPlayerWeapon());
-        if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("\t\t\tEnemy Weapon: " + engine.getEnemyWeapon());
+        System.out.print("\n");
         
-        System.out.println("Player Ammo: " + engine.getPlayerAmmo());
+        System.out.print("Player Weapon: " + engine.getPlayerWeapon());
         if (engine.getEnemy() != null && engine.getEnemy().isAlive())
-            System.out.println("\t\t\tEnemy Ammo: " + engine.getEnemyAmmo());
+            System.out.print("\t\t\tEnemy Weapon: " + engine.getEnemyWeapon());
+        
+        System.out.print("\n");
+        
+        System.out.print("Player Ammo: " + engine.getPlayerAmmo());
+        if (engine.getEnemy() != null && engine.getEnemy().isAlive())
+            System.out.print("\t\t\tEnemy Ammo: " + engine.getEnemyAmmo());
         
         System.out.print("\n\n\n");
         
@@ -114,15 +118,20 @@ public class UserInterface {
         if (engine.battleMode())
         {
             manageBattle();
-            if (engine.getEnemy().isDead())
+            if (engine.getEnemy() != null)
             {
-                System.out.println("Enemy defeated!");
-                if (engine.getEnemy().getItem().equals("health"))
-                    System.out.println("Picked up health. Restored HP.\n");
-                else if (engine.getEnemy().getItem().equals("maxammo"))
-                    System.out.println("Picked up ammo. Restored ammo.\n");
-                engine.getEnemy().dropItem();
+                if (engine.getEnemy().isDead())
+                {
+                    System.out.println("Enemy defeated!");
+                    if (engine.getEnemy().getItem().equals("health"))
+                        System.out.println("Picked up health. Restored HP.\n");
+                    else if (engine.getEnemy().getItem().equals("maxammo"))
+                        System.out.println("Picked up ammo. Restored ammo.\n");
+                    engine.getEnemy().dropItem();
+                }
             }
+            else
+                System.out.println("Enemy evaded! Move back one step\n");
         }
         
         System.out.print("Press Enter to take one step: ");
@@ -133,7 +142,6 @@ public class UserInterface {
     
     public void manageBattle()
     {
-        engine.spawnEnemy();
         System.out.println("You have encountered an enemy!");
 
         while (engine.battleMode())
@@ -155,7 +163,10 @@ public class UserInterface {
                     break;
             }
             
-            simulateEnemyAttack();
+            if (engine.getEnemy() != null) {
+                simulateEnemyAttack();
+                displayTurn();
+            }
         }
     }
     

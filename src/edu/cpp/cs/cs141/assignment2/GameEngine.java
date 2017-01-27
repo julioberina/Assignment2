@@ -29,6 +29,7 @@ public class GameEngine {
         player = new Player();
         enemy = null;
         battle = false;
+        rand = new Random();
         
         dungeon = new String[11];
         dungeon[0] = "#   ";
@@ -47,12 +48,21 @@ public class GameEngine {
     {
         encounterChances = new ArrayList<Boolean>();
         
+        for (int i = 0; i < 7; i++)
+            encounterChances.add(false);
+        
+        encounterChances.add(true); // index 7 (spot 8)
+        encounterChances.add(false);
+        encounterChances.add(false);
+        
+        /*
         for (int i = 0; i < 15; i++)
             encounterChances.add(true);
         for (int i = 15; i < 100; i++)
             encounterChances.add(false);
         for (int i = 0; i < 3; i++)
             Collections.shuffle(encounterChances);
+        */
     }
     
     public void assignPlayerWeapon(int choice)
@@ -126,6 +136,8 @@ public class GameEngine {
         if (rand.nextInt(10) == 0)
         {
             enemy = null;
+            dungeon[position--] = "_   ";
+            dungeon[position] = "#   ";
             return true;
         }
         else
@@ -145,12 +157,17 @@ public class GameEngine {
     
     public boolean encounterOccurred()
     {
-        return encounterChances.get(position);
+        if (encounterChances.get(position) == true)
+            return true;
+        else
+            return false;
+            
     }
     
     public void initiateBattle()
     {
         battle = true;
+        spawnEnemy();
     }
     
     public void simulateEnemyAttack()
@@ -162,13 +179,13 @@ public class GameEngine {
     {
         if (enemy == null)
             battle = false;
-        else
+        else 
         {
             if (player.isDead() || enemy.isDead())
             {
                 battle = false;
                 if (enemy.isDead() && enemy.getItem().equals("health"))
-                    player.restoreHealth();
+                    player.restoreHP(20);
                 else if (enemy.isDead() && enemy.getItem().equals("maxammo"))
                     player.getGun().reload();
             }
