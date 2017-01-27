@@ -94,9 +94,9 @@ public class Gun {
     
     public boolean shoot(ActiveAgent agent)
     {
-        ammo -= 1;
         if (ammo > 0 && weaponAccuracy.get((shotCounter++ % 100)))
         {
+            --ammo;
             if (weaponType.equals("Pistol"))
                 agent.takeDamage(1);
             else if (weaponType.equals("Rifle"))

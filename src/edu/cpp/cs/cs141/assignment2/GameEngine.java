@@ -48,21 +48,12 @@ public class GameEngine {
     {
         encounterChances = new ArrayList<Boolean>();
         
-        for (int i = 0; i < 7; i++)
-            encounterChances.add(false);
-        
-        encounterChances.add(true); // index 7 (spot 8)
-        encounterChances.add(false);
-        encounterChances.add(false);
-        
-        /*
         for (int i = 0; i < 15; i++)
             encounterChances.add(true);
         for (int i = 15; i < 100; i++)
             encounterChances.add(false);
         for (int i = 0; i < 3; i++)
             Collections.shuffle(encounterChances);
-        */
     }
     
     public void assignPlayerWeapon(int choice)
@@ -175,6 +166,15 @@ public class GameEngine {
         enemy.shoot(player);
     }
     
+    public void checkWeaponEmptiness()
+    {
+        if (player.getGun().isEmpty() && enemy.getGun().isEmpty())
+        {
+            player.getGun().reload();
+            enemy.getGun().reload();
+        }
+    }
+    
     public boolean battleMode()
     {
         if (enemy == null)
@@ -192,6 +192,11 @@ public class GameEngine {
         }
         
         return battle;
+    }
+    
+    public void terminateEnemy()
+    {
+        enemy = null;
     }
     
     public void spawnEnemy()

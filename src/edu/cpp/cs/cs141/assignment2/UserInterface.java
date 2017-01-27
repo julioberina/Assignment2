@@ -128,6 +128,7 @@ public class UserInterface {
                     else if (engine.getEnemy().getItem().equals("maxammo"))
                         System.out.println("Picked up ammo. Restored ammo.\n");
                     engine.getEnemy().dropItem();
+                    engine.terminateEnemy();
                 }
             }
             else
@@ -165,6 +166,7 @@ public class UserInterface {
             
             if (engine.getEnemy() != null) {
                 simulateEnemyAttack();
+                engine.checkWeaponEmptiness();
                 displayTurn();
             }
         }
@@ -180,7 +182,7 @@ public class UserInterface {
             if (engine.getEnemy().shoot(engine.getPlayer()))
                 System.out.println("Enemy shot you!\n");
             else
-                System.out.println("Enemy missed!\n");
+                System.out.println("Enemy has " + (engine.getEnemy().getGun().isEmpty() ? "No ammo!" : "Missed!"));
         }
     }
     
