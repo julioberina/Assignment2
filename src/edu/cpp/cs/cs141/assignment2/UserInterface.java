@@ -1,23 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * CS 141: Intro to Programming and Problem Solving
+ * Professor: Edwin Rodríguez
+ *
+ * Programming Assignment #2
+ *
+ * Implementation of Escape the Dungeon, a console-style turn-based game.
+ *
+ * Julio Berina
  */
+
 package edu.cpp.cs.cs141.assignment2;
 
 import java.util.Scanner;
 
 /**
- *
+ * This class represents the {@link UserInterface}, which gather user input
+ * and displays data to the screen.
  * @author jmb
  */
+
 public class UserInterface {
     
+    /***
+     * This field represents an instance of {@link GameEngine} which will return
+     * entities and its data for display on the screen.
+     */
     private GameEngine engine;
+    
+    /***
+     * This field represents an instance of the scanner, which will be used to 
+     * gather user input.
+     */
     private Scanner scan;
     
-    // game loop, instantiate engine and run other methods
-    // corresponding to the desired outcome
+    /**
+     * This represents the default constructor for the class.
+     */
+    public UserInterface()
+    {
+        
+    }
+    
+    /***
+     * This method represents the game loop for the entire game. It instantiates
+     * the scanner and the {@link GameEngine} as well as start the {@link Player}
+     * off with a {@link Gun} and starts the game.
+     */
     public void run()
     {
         scan = new Scanner(System.in);
@@ -28,6 +56,12 @@ public class UserInterface {
         startGame();
     }
     
+    /***
+     * This method prompts the user for a {@link Gun} to use for the whole game.
+     * It then returns the integer representation of their choice.
+    
+     * @return     Integer representation of chosen {@link Gun}.
+     */
     public int getWeaponChoice()
     {
         int choice = 0;
@@ -47,6 +81,12 @@ public class UserInterface {
         return choice;
     }
     
+    /***
+    This method represents a loop that keeps running as long as {@link Player}
+    is alive and still in the dungeon. It also checks for encounters, displays
+    {@link Player} data as well as the dungeon, and outputs whether you've won
+    or lost.
+    */
     public void startGame()
     {
         while (engine.getPlayer().isAlive() && engine.stillInDungeon()) {
@@ -66,6 +106,11 @@ public class UserInterface {
             System.out.println("You lose!\n");
     }
     
+    /***
+    This method outputs the {@link Player}'s ammo, health, and {@link Gun} to 
+    the screen. It also draws the dungeon and the {@link Player}'s current
+    position.
+    */
     public void displayStats()
     {
         System.out.print("Player HP: " + engine.getPlayerHP());
@@ -92,6 +137,10 @@ public class UserInterface {
         System.out.print("\n");
     }
     
+    /**
+    This method draws out the dungeon and its steps as well as the position of
+    the {@link Player}.
+    */
     public void displayTurn()
     {
         for (int i = 0; i < 70; i++) {
@@ -113,6 +162,10 @@ public class UserInterface {
         System.out.print("\n");
     }
     
+    /**
+    This method prompts the user to take a step forward and manages input when
+    battle occurs.
+    */
     public void playTurn()
     {
         if (engine.battleMode())
@@ -141,6 +194,10 @@ public class UserInterface {
         System.out.print("\n\n\n");
     }
     
+    /**
+    This method is called when an {@link Enemy} is crossed. It manages attacks
+    of {@link ActiveAgent}s as well as {@link Player}'s attempt to escape.
+    */
     public void manageBattle()
     {
         System.out.println("You have encountered an enemy!");
@@ -172,6 +229,9 @@ public class UserInterface {
         }
     }
     
+    /**
+    This method manages the {@link Enemy}'s turn for attack.
+    */
     public void simulateEnemyAttack()
     {
         if (engine.getEnemy().isAlive())
@@ -186,6 +246,13 @@ public class UserInterface {
         }
     }
     
+    /**
+    This method gathers user input to decide whether to try to shoot the
+    {@link Enemy} or attempt to escape. It then returns the integer representation
+    of that choice.
+    
+    @return     Integer representation of choice by user.
+    */
     public int getBattleAction()
     {
         int choice = 0;

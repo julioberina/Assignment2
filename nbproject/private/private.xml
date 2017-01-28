@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/Gun.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/UserInterface.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/Enemy.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/Player.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/GameEngine.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/Item.java</file>
-            <file>file:/home/jmb/NetBeansProjects/Assignment2/src/edu/cpp/cs/cs141/assignment2/ActiveAgent.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

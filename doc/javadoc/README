@@ -1,0 +1,44 @@
+Assignment Description: This is an implementation of Escape the Dungeon using Java and Object-Oriented Programming.
+
+Individual information:
+ -Name: Julio Berina
+ -Class: CS 141
+ -Professor: Edwin Rodríguez
+
+Approach: 
+First off, my idea for the game loop was to make the run method an instance of the
+UserInterface class rather than the GameEngine class. I did this because the
+UserInterface class will be the one to display and gather user input, so I decided
+to implement the run method in UserInterface and have an instance of GameEngine
+inside UserInterface. That instance will gather and take data needed by the
+UserInterface class. In terms of lines of code, a couple of my methods were above 20
+lines, but I let that slide. As long as my methods for the most part were 15-20 lines
+long, I'm in the sweet spot. If my methods were longer, I'd create new methods with
+different names to separate the tasks and just call the tasks inside other methods.
+For possibilities in the game, I used Lists of size 100 to represent a percentage
+and fill it with chances of "hit or miss", "pistol, rifle, or shotgun", etc.
+I used private variables as ways to index from those lists. One exception to this
+idea is the escape option, which takes a simple random number from 0-9 and returns
+true if 0 and false if any other value. The game loop runs as long as the player
+is alive and still in the dungeon. If the player dies or reaches the exit, the game
+is over and a message outputs based on how the game ended. For the Player and Enemy
+classes, I decided to create them and inherit from the ActiveAgent class, which was
+an abstract base class. The game is played throughout by the scanner asking the user
+to press enter to take a step forward. If an encounter occurs, it enters battle mode
+by setting (boolean battle) inside GameEngine to true. That initiates battle and
+changes up the screen to a battle-mode interface. This is displayed until the player
+kills the enemy, the enemy kills the player, or the player manages to escape.
+
+Conclusions/Lessons learned:
+The hardest part about the project wasn't exactly writing the code. It's easy to spew
+out a bunch of spaghetti code everywhere and have a working program. The hardest part
+was learning to design your code in an object-oriented manner. It was difficult to
+implement code in a way that not only works well but is also neatly designed. I did
+the best I could to design my code in an OO-manner, and I think that I did a pretty
+good job in doing so. Although, it took longer for me to make a game compared to
+if I just wrote spaghetti code, I learned so much more. It forced me to look at
+object-oriented programming in ways that I've never really looked at before. I never
+understood why code had to be organized in classes and methods and all. I used to
+think it was stupid, but now I see why I have to do these things. It's for the
+sake of organization and easier maintainability.
+
